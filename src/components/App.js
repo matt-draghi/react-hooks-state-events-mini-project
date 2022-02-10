@@ -13,6 +13,13 @@ function App() {
   //use state for categories?
   const [selectedCategory, setSelectedCatagory] = useState("All")
 
+
+  const onTaskFormSubmit = (formData) =>{
+    console.log(formData)
+    const updatedTaskList = [...tasks, formData]
+    setTasks(updatedTaskList)
+  }
+
   const handleRemoveTask = (text) => {
     const remainingTasks = tasks.filter((task) => task.text !== text)
     setTasks(remainingTasks)
@@ -35,7 +42,7 @@ function App() {
     <div className="App">
       <h2>My tasks</h2>
       <CategoryFilter categories={CATEGORIES} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCatagory}/>
-      <NewTaskForm />
+      <NewTaskForm categories={CATEGORIES} onTaskFormSubmit={onTaskFormSubmit}/>
       <TaskList tasks={displayTasks} handleRemoveTask={handleRemoveTask}/>
     </div>
   );
